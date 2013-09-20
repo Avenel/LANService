@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130918180316) do
+ActiveRecord::Schema.define(:version => 20130919060205) do
+
+  create_table "games", :force => true do |t|
+    t.string   "name"
+    t.integer  "maxPlayers"
+    t.string   "gameModes"
+    t.string   "availableTeams"
+    t.string   "genre"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "orders", :force => true do |t|
+    t.string   "product"
+    t.integer  "orderer"
+    t.decimal  "price"
+    t.integer  "vendor"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -38,6 +57,15 @@ ActiveRecord::Schema.define(:version => 20130918180316) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
+    t.string   "alias"
+    t.string   "ip"
+    t.string   "pic"
+    t.string   "fav1"
+    t.string   "fav2"
+    t.string   "fav3"
+    t.string   "fav4"
+    t.string   "fav5"
+    t.string   "sonstiges"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -49,5 +77,13 @@ ActiveRecord::Schema.define(:version => 20130918180316) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "vendors", :force => true do |t|
+    t.string   "name"
+    t.string   "fone"
+    t.string   "website"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

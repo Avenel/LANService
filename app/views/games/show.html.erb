@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @game.name %>
+</p>
+
+<p>
+  <b>Maxplayers:</b>
+  <%= @game.maxPlayers %>
+</p>
+
+<p>
+  <b>Gamemodes:</b>
+  <%= @game.gameModes %>
+</p>
+
+<p>
+  <b>Availableteams:</b>
+  <%= @game.availableTeams %>
+</p>
+
+<p>
+  <b>Genre:</b>
+  <%= @game.genre %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

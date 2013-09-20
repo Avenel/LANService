@@ -1,4 +1,13 @@
 LANService::Application.routes.draw do
+  resources :vendors
+
+
+  resources :orders
+
+
+  resources :games
+
+
   authenticated :user do
     root :to => 'home#index'
   end
