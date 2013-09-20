@@ -30,4 +30,11 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "Can't delete yourself."
     end
   end
+
+  def toggleCurrentGame
+    current_user.currentGame = params[:user][:toggleCurrentGame].to_i
+    current_user.save
+
+    redirect_to "/", :notice => 'CurrentGame changed.' +  Game.find(current_user.currentGame).name
+  end
 end

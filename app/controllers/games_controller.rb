@@ -4,7 +4,8 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    calcVotes
+    @games = Game.order("votes DESC").all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,4 +83,48 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def calcVotes
+    games = Game.all
+
+    games.each do |game|
+      game.votes = 0
+      game.save
+    end
+
+    users = User.all
+    users.each do |user|
+
+      if !(user.fav1.nil?) then
+        favGame1 = Game.find(user.fav1)
+        favGame1.votes += 1
+        favGame1.save
+      end
+
+      if !(user.fav2.nil?) then
+        favGame2 = Game.find(user.fav2)
+        favGame2.votes += 1
+        favGame2.save
+      end
+
+      if !(user.fav3.nil?) then
+        favGame3 = Game.find(user.fav3)
+        favGame3.votes += 1
+        favGame3.save
+      end
+
+      if !(user.fav4.nil?) then
+        favGame4 = Game.find(user.fav4)
+        favGame4.votes += 1
+        favGame4.save
+      end
+
+      if !(user.fav5.nil?) then
+        favGame5 = Game.find(user.fav5)
+        favGame5.votes += 1
+        favGame5.save
+      end
+    end
+  end
+
 end

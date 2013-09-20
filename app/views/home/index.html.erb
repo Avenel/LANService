@@ -1,4 +1,10 @@
 <h3>Home</h3>
 <% @users.each do |user| %>
-  <p>User: <%=link_to user.name, user %></p>
+	<% if !user.currentGame.nil? then %>
+		<% @currentGame = Game.find(user.currentGame).name %>
+	<% else %>
+		<% @currentGame = "IDLE" %>
+	<% end %>
+
+  <p>User: <%=link_to user.name, user %> CurrentGame: <%= @currentGame %> </p>
 <% end %>

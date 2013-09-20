@@ -5,6 +5,7 @@ LANService::Application.routes.draw do
   resources :orders
 
   match 'orders/toggleOrderingAllowed', to: 'orders#toggleOrderingAllowed', via: [:get, :post]
+  match 'users/toggleCurrentGame', to: 'users#toggleCurrentGame', via: [:get, :post]
 
 
   resources :games

@@ -6,6 +6,7 @@ class CreateGames < ActiveRecord::Migration
       t.string :gameModes
       t.string :availableTeams
       t.string :genre
+      t.integer :votes
 
       t.timestamps
     end

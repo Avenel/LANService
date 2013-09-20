@@ -15,12 +15,43 @@
 
   <div class="form-inputs" style="float:right">
   	<%= f.input :ip %> 
-  	<%= f.input :pic %>  
-  	<%= f.input :fav1 %>  
-  	<%= f.input :fav2 %>  
-  	<%= f.input :fav3 %>  
-  	<%= f.input :fav4 %>  
-  	<%= f.input :fav5 %>  
+    
+    <% @games = Game.all %>
+    <% @games_arr = Array.new %>
+
+    <% @games.each do |game| %>
+      <% @gitem = Array.new %>
+      <% @name = game.name %>
+      <% @id = game.id %>
+      <% @gitem.push(@name) %>
+      <% @gitem.push(@id) %>
+      <% @games_arr.push(@gitem) %>
+    <% end %>
+
+    <br />    
+    <label class="decimal optional control-label">Favourite Game 1</label>
+  	<%= f.select :fav1, @games_arr  %>
+
+    <br />    
+    <label class="decimal optional control-label">Favourite Game 1</label>
+    <%= f.select :fav2, @games_arr  %>
+
+    <br />    
+    <label class="decimal optional control-label">Favourite Game 1</label>
+    <%= f.select :fav3, @games_arr  %>
+
+    <br />    
+    <label class="decimal optional control-label">Favourite Game 1</label>
+    <%= f.select :fav4, @games_arr  %>
+
+    <br />    
+    <label class="decimal optional control-label">Favourite Game 1</label>
+    <%= f.select :fav5, @games_arr  %>
+    
+    <br />    
+    <label class="decimal optional control-label">Current Game</label>
+    <%= f.select :currentGame, @games_arr %>
+
   	<%= f.input :sonstiges %> 
 
   	<%= f.button :submit, 'Update', :class => 'btn-primary', :style => 'float:right' %>

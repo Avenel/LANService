@@ -29,6 +29,28 @@
         <a href="#" >[ADMIN] </a>
       <% end %>
     <li>
+  
+    <li>
+      <% @games = Game.all %>
+        <% @games_arr = Array.new %>
+
+        <% @games.each do |game| %>
+          <% @gitem = Array.new %>
+          <% @name = game.name %>
+          <% @id = game.id %>
+          <% @gitem.push(@name) %>
+          <% @gitem.push(@id) %>
+          <% @games_arr.push(@gitem) %>
+        <% end %>
+
+      <%= form_tag(controller: "users", action: "toggleCurrentGame", method: "get") do %>
+      <div class="form-inputs">
+        <%= select(:user, :toggleCurrentGame, @games_arr) %>
+        <%= submit_tag("Apply") %>
+      </div>
+      <% end %>
+    </li>
+
     <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
     </li>
   <% else %>

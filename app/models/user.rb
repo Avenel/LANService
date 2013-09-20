@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
-  attr_accessible :alias, :ip, :pic, :fav1, :fav2, :fav3, :fav4, :fav5, :sonstiges
+  attr_accessible :alias, :ip, :pic, :fav1, :fav2, :fav3, :fav4, :fav5, :sonstiges, :currentGame
 
 end

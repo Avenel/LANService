@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20130919060205) do
     t.string   "gameModes"
     t.string   "availableTeams"
     t.string   "genre"
+    t.integer  "votes"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -61,12 +62,13 @@ ActiveRecord::Schema.define(:version => 20130919060205) do
     t.string   "alias"
     t.string   "ip"
     t.string   "pic"
-    t.string   "fav1"
-    t.string   "fav2"
-    t.string   "fav3"
-    t.string   "fav4"
-    t.string   "fav5"
+    t.integer  "fav1"
+    t.integer  "fav2"
+    t.integer  "fav3"
+    t.integer  "fav4"
+    t.integer  "fav5"
     t.string   "sonstiges"
+    t.integer  "currentGame"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

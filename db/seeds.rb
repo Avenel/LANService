@@ -21,6 +21,7 @@ puts 'user: ' << user.name
 user.add_role :user
 
 games = Game.create([ 
+	{name: 'IDLE - NIX', genre: 'IDLE'},
 	{name: 'Age of Empires 2', genre: 'Strategie'},
 	{name: 'Aliens vs Predetor 2', genre: 'Shooter'},
 	{name: 'Battlefield 2', genre: 'Shooter'},

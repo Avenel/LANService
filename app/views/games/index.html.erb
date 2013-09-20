@@ -7,6 +7,7 @@
     <th>Gamemodes</th>
     <th>Availableteams</th>
     <th>Genre</th>
+    <th>Votes</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +20,7 @@
     <td><%= game.gameModes %></td>
     <td><%= game.availableTeams %></td>
     <td><%= game.genre %></td>
+    <td><%= game.votes %></td>
     <td><%= link_to 'Show', game %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
     <% if current_user.has_role? :admin %>
