@@ -3,7 +3,7 @@
 <p><b>Bestellungen werden entgegen genommen bis: <%= @ordering_end.to_time().getlocal().strftime("%Y-%m-%d %H:%M:%S") %></b></p>
 
 <% @users.each do |user| %>
-<div style="border: 1px solid;">
+<div style="border: 1px solid; background: #EFEFEF; padding: 25px">
 <p><b style="font-size: 20px;"><%= user.name %></b></p>
   <table>
   <tr>
