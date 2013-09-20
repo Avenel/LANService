@@ -3,7 +3,7 @@
 	<% if !user.currentGame.nil? then %>
 		<% @currentGame = Game.find(user.currentGame).name %>
 	<% else %>
-		<% @currentGame = "IDLE" %>
+		<% @currentGame = "IDLE - NIX" %>
 	<% end %>
 
   <p>User: <%=link_to user.name, user %> CurrentGame: <%= @currentGame %> </p>

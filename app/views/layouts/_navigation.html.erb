@@ -43,15 +43,16 @@
           <% @games_arr.push(@gitem) %>
         <% end %>
 
-      <%= form_tag(controller: "users", action: "toggleCurrentGame", method: "get") do %>
-      <div class="form-inputs">
-        <%= select(:user, :toggleCurrentGame, @games_arr) %>
-        <%= submit_tag("Apply") %>
-      </div>
+      <%= form_tag(controller: "/users", action: "toggleCurrentGame", method: "get") do %>
+        <div class="form-inputs" style="padding: 10px 15px 10px;">
+          <%= select_tag "toggleCurrentGame", options_for_select(@games_arr.collect{ |u| [u[0], u[1]] }, {selected:  current_user.currentGame})%>
+          <%= submit_tag("Apply", {style: "margin-bottom: 10px"}) %>
+        </div>
       <% end %>
     </li>
 
-    <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
+    <li>
+      <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
     </li>
   <% else %>
     <li>

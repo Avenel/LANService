@@ -30,27 +30,27 @@
 
     <br />    
     <label class="decimal optional control-label">Favourite Game 1</label>
-  	<%= f.select :fav1, @games_arr  %>
+  	<%= f.select :fav1, @games_arr, :selected => current_user.fav1  %>
 
     <br />    
     <label class="decimal optional control-label">Favourite Game 1</label>
-    <%= f.select :fav2, @games_arr  %>
+    <%= f.select :fav2, @games_arr, :selected => current_user.fav1   %>
 
     <br />    
     <label class="decimal optional control-label">Favourite Game 1</label>
-    <%= f.select :fav3, @games_arr  %>
+    <%= f.select :fav3, @games_arr, :selected => current_user.fav1   %>
 
     <br />    
     <label class="decimal optional control-label">Favourite Game 1</label>
-    <%= f.select :fav4, @games_arr  %>
+    <%= f.select :fav4, @games_arr, :selected => current_user.fav1   %>
 
     <br />    
     <label class="decimal optional control-label">Favourite Game 1</label>
-    <%= f.select :fav5, @games_arr  %>
+    <%= f.select :fav5, @games_arr, :selected => current_user.fav1   %>
     
     <br />    
     <label class="decimal optional control-label">Current Game</label>
-    <%= f.select :currentGame, @games_arr %>
+    <%= f.select :currentGame, @games_arr, :selected => current_user.currentGame  %>
 
   	<%= f.input :sonstiges %> 
 
