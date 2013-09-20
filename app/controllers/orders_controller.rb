@@ -1,9 +1,16 @@
 class OrdersController < ApplicationController
   before_filter :authenticate_user!
   
+  @@ordering_allowed = true;
+  @@ordering_end = Time.new;
+
   # GET /orders
   # GET /orders.json
   def index
+
+    @ordering_end = @@ordering_end
+    @ordering_allowed = @@ordering_allowed
+
     if current_user.has_role? :admin then 
       @users = User.all
       @orders = Order.all
@@ -38,6 +45,11 @@ class OrdersController < ApplicationController
   def new
     if Vendor.all.empty? then
       redirect_to orders_url, :notice => 'Please create a Vendor first!'
+      return
+    end
+
+    if !@@ordering_allowed then
+      redirect_to orders_url, :notice => 'Ordering time expired. Please ask Admin for a new one!'
       return
     end
 
@@ -126,5 +138,19 @@ class OrdersController < ApplicationController
     end
 
     return vendors_arr
+  end
+
+  def toggleOrderingAllowed
+    @@ordering_allowed = (params[:order][:orderingAllowed].to_i == 1) ? true : false
+    
+    year = params[:order]["ordering_end(1i)"].to_i
+    month = params[:order]["ordering_end(2i)"].to_i
+    day =params[:order]["ordering_end(3i)"].to_i
+    hour = params[:order]["ordering_end(4i)"].to_i
+    minute = params[:order]["ordering_end(5i)"].to_i
+
+    @@ordering_end = DateTime.new(year,month,day,hour,minute)
+
+    redirect_to orders_url, :notice => 'OrderingAllowed changed.' + @@ordering_allowed.to_s + @@ordering_end.to_time().getlocal().strftime("%Y-%m-%d %H:%M:%S")
   end
 end

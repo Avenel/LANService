@@ -4,6 +4,8 @@ LANService::Application.routes.draw do
 
   resources :orders
 
+  match 'orders/toggleOrderingAllowed', to: 'orders#toggleOrderingAllowed', via: [:get, :post]
+
 
   resources :games
 

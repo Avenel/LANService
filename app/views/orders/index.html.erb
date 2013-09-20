@@ -1,5 +1,6 @@
 <h1>Bestellungen</h1>
 
+<p><b>Bestellungen werden entgegen genommen bis: <%= @ordering_end.to_time().getlocal().strftime("%Y-%m-%d %H:%M:%S") %></b></p>
 
 <% @users.each do |user| %>
 <div style="border: 1px solid;">
@@ -48,3 +49,21 @@
 <br />
 
 <%= link_to 'New Order', new_order_path %>
+
+
+<% if current_user.has_role? :admin %>
+<%= form_tag(controller: "orders", action: "toggleOrderingAllowed", method: "get") do %>
+   <div class="form-inputs">
+    
+      <br />    
+      <label class="decimal optional control-label">Ordering allowed?</label>
+      <%= select(:order, :orderingAllowed, [['Nein', 0], ['Ja', 1]]) %> <p>(<%= (@ordering_allowed) ? "Yes" : "No" %>)</p>
+      <br />
+      <label class="decimal optional control-label">Ordering time</label>
+      <%= datetime_select(:order, :ordering_end) %>
+    
+
+    <%= submit_tag("Apply") %>
+  </div>
+<% end %>
+<% end %>

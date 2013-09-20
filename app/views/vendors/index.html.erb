@@ -17,7 +17,9 @@
     <td><%= vendor.website %></td>
     <td><%= link_to 'Show', vendor %></td>
     <td><%= link_to 'Edit', edit_vendor_path(vendor) %></td>
-    <td><%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if current_user.has_role? :admin %>
+      <td><%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
