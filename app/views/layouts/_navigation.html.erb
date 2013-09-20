@@ -22,6 +22,13 @@
 
    <% if user_signed_in? %>
     <li>
+      <a href="#" >[<%= current_user.name %>]</a>
+    </li>
+    <li>
+      <% if current_user.has_role? :admin %>
+        <a href="#" >[ADMIN] </a>
+      <% end %>
+    <li>
     <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
     </li>
   <% else %>

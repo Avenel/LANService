@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :orderer
       t.decimal :price
       t.integer :vendor
+      t.integer :payed
 
       t.timestamps
     end

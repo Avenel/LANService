@@ -4,7 +4,14 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    if current_user.has_role? :admin then 
+      @users = User.all
+      @orders = Order.all
+    else
+      @users = Array.new
+      @users.push(current_user)
+      @orders = Order.where("orderer = ?", current_user.id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +24,9 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
 
+    @vendor_name = Vendor.find(@order.vendor).name
+    @orderer_name = User.find(@order.orderer).name
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @order }
@@ -26,7 +36,14 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
+    if Vendor.all.empty? then
+      redirect_to orders_url, :notice => 'Please create a Vendor first!'
+      return
+    end
+
     @order = Order.new
+
+    @vendors_arr = getVendors
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +53,13 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:id])#
+
+    if @order.orderer != current_user.id && !(current_user.has_role? :admin) then
+      redirect_to orders_url, :notice => 'You are not the origin creator of this order!'
+    end
+
+    @vendors_arr = getVendors
   end
 
   # POST /orders
@@ -75,11 +98,33 @@ class OrdersController < ApplicationController
   # DELETE /orders/1.json
   def destroy
     @order = Order.find(params[:id])
+
+    if @order.orderer != current_user.id && !(current_user.has_role? :admin) then
+      redirect_to orders_url, :notice => 'You are not the origin creator of this order!'
+      return
+    end
+
     @order.destroy
 
     respond_to do |format|
       format.html { redirect_to orders_url }
       format.json { head :no_content }
     end
+  end
+
+  def getVendors
+    @vendors = Vendor.find(:all)
+
+    vendors_arr = Array.new
+    @vendors.each do |vendor|
+      vitem = Array.new
+      name = vendor.name
+      id = vendor.id
+      vitem.push(name)
+      vitem.push(id)
+      vendors_arr.push(vitem)
+    end
+
+    return vendors_arr
   end
 end

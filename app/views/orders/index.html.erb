@@ -1,28 +1,49 @@
-<h1>Listing orders</h1>
+<h1>Bestellungen</h1>
 
-<table>
+
+<% @users.each do |user| %>
+<div style="border: 1px solid;">
+<p><b style="font-size: 20px;"><%= user.name %></b></p>
+  <table>
   <tr>
-    <th>Product</th>
-    <th>Orderer</th>
-    <th>Price</th>
-    <th>Vendor</th>
+    <th>Produkt</th>
+    <th>Besteller</th>
+    <th>Preis</th>
+    <th>Lieferant</th>
+    <th>Bezahlt?</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
-<% @orders.each do |order| %>
-  <tr>
-    <td><%= order.product %></td>
-    <td><%= order.orderer %></td>
-    <td><%= order.price %></td>
-    <td><%= order.vendor %></td>
-    <td><%= link_to 'Show', order %></td>
-    <td><%= link_to 'Edit', edit_order_path(order) %></td>
-    <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <% @sum = 0 %>
+  <% @payed = 0 %>
+  <% @orders.each do |order| %>
+    <% if order.orderer == user.id %>
+      <tr>
+        <td><%= order.product %></td>
+        <td><%= User.find(order.orderer).name %></td>
+        <td><%= order.price %></td>
+        <td><%= Vendor.find(order.vendor).name %></td>
+        <td style="color:<%= (order.payed) ? "green" : "red" %>!important"><%= (order.payed) ? "Yes" : "No" %></td>
+        <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% @sum += order.price %>
+      <% if order.payed then %>
+        <% @payed += order.price %>
+      <% end %>
+    <% end %>
+  <% end %>
+  </table>
+  <br />
+  <p><b>TOTAL: <%= @sum %> €</b></p>
+  <% @diff = @sum - @payed %>
+  <p><b style="color:<%= (@diff>0) ? "red" : "green" %>!important">DIFF: <%= @diff %> €</b></p>
+  <br />
+</div>
+<br />
 <% end %>
-</table>
 
 <br />
 

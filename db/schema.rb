@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130919060205) do
     t.integer  "orderer"
     t.decimal  "price"
     t.integer  "vendor"
+    t.integer  "payed"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
